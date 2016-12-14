@@ -1,38 +1,47 @@
 # \<calender-lite\>
 
-Multi select date picker calendar
+Multi select date picker or calendar
 
-## Install the Polymer-CLI
+calender-lite is a Webcomponent build with Polymer. It gives a nice api to play with it.
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
+It has two elements one is calender-lite and another is calender-lite-dark(dark theme).
 
-## Viewing Your Application
+    <calendar-lite id="someid"></calender-lite>
 
-```
-$ polymer serve
-```
+gives you the calendar, you can attach date-change event listner to it as shown below
 
-## Building Your Application
+    // called whenever a user selects/change a date
+    document.querySelector('#someid').addEventListener('date-change', function (e) {
+        console.log(e.detail.date); //update input values...
+    })
+  
+You can disable week days by passing an array as shown below.
 
-```
-$ polymer build
-```
+    <calendar-lite id="someid" disabled-week-day='["Fri","Sun"]'></calender-lite>
+        
+You can disable required days by passing an array as shown below.
 
-This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
-containing a bundled (Vulcanized) and unbundled builds, both run through HTML,
-CSS, and JS optimizers.
+    <calendar-lite id="someid" disabled-days="[4,20,27]"></calender-lite>
 
-You can serve the built versions by giving `polymer serve` a folder to serve
-from:
+You can select mutiple days by passing an Object to `multi-select` attribute as shown below.
 
-```
-$ polymer serve build/bundled
-```
+    <calendar-lite id="someid" multi-select='{"max":3,"consequent":false}'  disabled-week-day='["Fri"]'  disabled-days="[2,3,4]">
+    </calendar-lite>
+    
+Object muti-select: `max` is nothing but maximum number of days that can be selected, if `consequent` is true it will select the days in consequent.
 
-## Running Tests
+you can provide min and max dates, such that calendar-lite will disable the remaining dates.
 
-```
-$ polymer test
-```
+    <calendar-lite id="someid" min-date="2016,12,9" multi-select='{"max":3,"consequent":false}'  disabled-week-day='["Fri"]'  disabled-days="[2,3,4]">
+    </calendar-lite>
+    
+min-date and max-date format should be yyyy-mm-dd.
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+## To change theme
+
+To change main header color
+
+    <calendar-lite main-color="#E91E63"  id="someid"></calender-lite>
+
+You can use dark theme calendar by importing `calendar-lite-dark.html` instead of `calendar-lite.html`.
+    
