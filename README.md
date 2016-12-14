@@ -43,7 +43,7 @@ It has two themes one is calendar-lite and another is calendar-lite-dark(dark th
 ```
 -->
 ```html
-<calendar-lite-dark></calendar-lite-dark>
+<calendar-lite-dark  id="someid"  multi-select='{"max":3,"consequent":true}'></calendar-lite-dark>
 ```
 
 
@@ -55,24 +55,44 @@ You can attach date-change event listener to it as shown below
     document.querySelector('#someid').addEventListener('date-change', function (e) {
         console.log(e.detail.date); //update input values...
     })
- ```
+```
  
 You can disable week days by passing an array as shown below.
 ```html
     <calendar-lite id="someid" disabled-week-day='["Fri","Sun"]'></calendar-lite>
- ```
+```
  
-You can disable required days by passing an array as shown below.
+You can disable a bunch of days by passing an array as shown below.
 
 ```html
     <calendar-lite id="someid" disabled-days="[4,20,27]"></calendar-lite>
  ```
+ 
+Here you may get a doubt that "How to disable different dates for different months?"
+
+Answer is, you can update the disable dates on `month-change` event as shown below.
+ 
+```javascript
+    document.querySelector('#someid').addEventListener('month-change', function (e) {
+        document.querySelector('#someid').disabledDays = [7,8]
+    })
+```
+ 
 You can select multiple days by passing an Object to `multi-select` attribute as shown below.
 
 ```html
     <calendar-lite id="someid" multi-select='{"max":3,"consequent":false}'  disabled-week-day='["Fri"]'  disabled-days="[2,3,4]">
     </calendar-lite>
- ```    
+ ```
+ 
+To get the selected multiple dates, use below listener
+
+```javascript
+   document.querySelector('#excalendar').addEventListener('multiselect', function (e) {
+        console.log(e.detail.dates); // array of selected dates
+    })
+```
+ 
 Object multi-select: `max` is nothing but maximum number of days that can be selected, if `consequent` is true it will select the days in consequent.
 
 you can provide min and max dates, such that calendar-lite will disable the remaining dates.
