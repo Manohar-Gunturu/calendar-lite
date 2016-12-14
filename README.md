@@ -6,19 +6,49 @@ Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to
 
 ##Features
 
-1. selecting min and max date,
+1. Set min and max date,
 2. Select Multiple dates(consequent or random)
 3. Disable week days(example disable all Sundays)
 4. Disabale required days(examples 1st of this month)
-5. triggers an event on month/date change
+5. triggers an event on date change
 6. triggers an event on month change
 7. Customizable theme
 
 It has two themes one is calendar-lite and another is calendar-lite-dark(dark theme).
 
-    <calendar-lite id="someid"></calendar-lite>
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="calendar-lite.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
 
-gives you the calendar, you can attach date-change event listener to it as shown below
+```html
+   <calendar-lite id="someid"></calendar-lite>
+```
+
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="calendar-lite-dark.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+
+```html
+   <calendar-lite-dark id="someid"></calendar-lite-dark>
+```
+
+
+
+You can attach date-change event listener to it as shown below
 
     // called whenever a user selects/change a date
     document.querySelector('#someid').addEventListener('date-change', function (e) {
