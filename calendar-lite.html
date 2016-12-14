@@ -26,9 +26,10 @@
    :host{
      display: inline-block;
      width:312px;
-	   -webkit-font-smoothing: antialiased;
-	   font-family: Helvetica, Arial, sans-serif;
-	   border: 1px solid #eee;
+	 -webkit-font-smoothing: antialiased;
+	 font-family: Helvetica, Arial, sans-serif;
+	 border: 1px solid #eee;
+	 --my-elem-primary:#3acfe3;
      text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
      text-rendering: optimizeLegibility !important;
      -webkit-font-smoothing: antialiased !important;
@@ -357,7 +358,10 @@
           type: Date,
           value: null
         },
-        disabledDays:Array,
+        disabledDays:{
+		  type:Array,
+		  value:[]	
+		},
         currentYear: {
           type: Number
         },
@@ -376,7 +380,10 @@
           type:Array,
           value:[0,1,2,3,4,5]
         },
-        disabledWeekDay: Array
+        disabledWeekDay:{
+		  type:Array,
+		  value:[]	
+		}
 	  },
 	   observers: [
         '_populate(date)',
