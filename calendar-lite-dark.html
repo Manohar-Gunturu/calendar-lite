@@ -256,11 +256,11 @@
     <!-- sub header with  left, right icon and present viewing month  -->
     <div class="container menu flex-horizontal" style="padding: 4px 0px;color: #fff;">	  
       <paper-icon-button on-tap="_swipePrevMonth" icon="my-icons:left"></paper-icon-button>	 
-      <div class="flexchild"> <span class="menu_item"></span> 
-      <span class='menu_item'>{{monthFormat(currentMonth)}}</span> 
-      <span class='menu_item' style="margin-left:4px;"> {{yearFormat(currentYear)}} </span> </div>	  
+      <div class="flexchild"> <span></span> 
+      <span>{{monthFormat(currentMonth)}}</span> 
+      <span style="margin-left:4px;"> {{yearFormat(currentYear)}} </span> </div>	  
       <paper-icon-button on-tap="_swipeNextMonth" icon="my-icons:right"></paper-icon-button>	  
-	  </div>
+	</div>
 	
 
    <!-- .pageContainer contains calendar, months list and years list  -->
@@ -431,6 +431,7 @@
         this.date = new Date();
       }     
 
+	  //clone into tmpDate  
       tmpDate = new Date(this.currentYear,this.currentMonth,1);    
       var tmpArray = [];
 		  cf = 0;
