@@ -9,8 +9,8 @@ Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to
 1. Set min and max date,
 2. Select Multiple dates(consequent or random)
 3. Disable week days(example disable all Sundays)
-4. Disabale an array of dates(example 1st and 3rd of this month)
-5. triggers an event on date change(So you can update the value of a input field)
+4. Disable an array of dates(example 1st and 3rd of this month)
+5. triggers an event on date change(So you can update the value of an input field)
 6. triggers an event on month change(So you can set different disable dates for different months)
 7. Customizable theme
 
