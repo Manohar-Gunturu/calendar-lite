@@ -232,10 +232,12 @@
       font-weight: bold;
     }
 
- 
-
-
-
+    .notextselect,.dateSticker,.dateItem{
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
    
   </style>
 
@@ -243,10 +245,10 @@
   <!-- Main header date,month,year are compund binded to selected date -->
 
    <div class="mainHeader" style="">
-       <div class="yearContainer" type='yearList' on-tap="_show">
+       <div class="yearContainer notextselect" type='yearList' on-tap="_show">
            {{_getUpdated(date,'year')}} 
        </div>
-       <div class="monthContainer">
+       <div class="monthContainer notextselect">
          <span type='calendarContent' on-tap="_show" class="menu_item">{{_getUpdated(date,'day')}}</span>, <span class='menu_item' type='monthsList' on-tap="_show">{{_getUpdated(date,'month')}}</span> <span class='menu_item' type='calendarContent' on-tap="_show">{{_getUpdated(date,'date')}}</span> 
        </div>
    </div>

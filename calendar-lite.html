@@ -160,7 +160,13 @@
       font-size: 14px;	
     }
   
-    
+    .notextselect,.dateSticker{
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
+	
     .dayNames>div{
       padding: 12px;
       font-size: 12px;
@@ -243,10 +249,10 @@
   <!-- Main header date,month,year are compund binded to selected date -->
 
    <div class="mainHeader" style="">
-       <div class="yearContainer" type='yearList' on-tap="_show">
+       <div class="yearContainer notextselect" type='yearList' on-tap="_show">
            {{_getUpdated(date,'year')}} 
        </div>
-       <div class="monthContainer">
+       <div class="monthContainer notextselect">
          <span type='calendarContent' on-tap="_show" class="menu_item">{{_getUpdated(date,'day')}}</span>, <span class='menu_item' type='monthsList' on-tap="_show">{{_getUpdated(date,'month')}}</span> <span class='menu_item' type='calendarContent' on-tap="_show">{{_getUpdated(date,'date')}}</span> 
        </div>
    </div>
@@ -272,7 +278,7 @@
         <div id="yearList" class="page" style="display:none;">
         <div class="flex-wrap">
           <template is="dom-repeat" items="{{years}}">
-            <div class="dateItem" on-tap="_setYear">{{item}}</div>
+            <div class="dateItem notextselect" on-tap="_setYear">{{item}}</div>
           </template>
         </div>
         </div>
@@ -282,7 +288,7 @@
         <div id="monthsList" class="page" style="display:none;">
           <div class="mothwrap">
           <template is="dom-repeat" items='["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"]'>
-            <div class="dateItem" on-tap="_setMonth">{{item}}</div>
+            <div class="dateItem notextselect" on-tap="_setMonth">{{item}}</div>
           </template>
           </div>
         </div>
@@ -467,7 +473,7 @@
   _getDayClass:function(s,d){
      if(this.multiSelect != null){
          if(multiple.indexOf(s+","+this.currentMonth+","+this.currentYear) > -1){
-             return "dateSticker selected";
+             return "dateSticker  selected";
          }
       }
     if(this.date.getDate() == s && this.date.getMonth() == this.currentMonth && this.date.getFullYear()== this.currentYear){
