@@ -534,9 +534,7 @@
       this.pagination();
    },
    _setMonth: function(e){
- 
       this.currentMonth = months_names.indexOf(e.model.item); 
-
       this.generateTable();
       this.separator = [0,1,2,3,4,5];
       current_page = 'calendarContent';
@@ -587,7 +585,6 @@
      return this.currentYear;
    },
 	 _swipeNextMonth : function(){
-	    //this.cancelAnimation();
 	  
      this.$.mainContent.classList.add('slide-right') ; 
      this._once(this._animationEvent, function() {
@@ -595,17 +592,14 @@
      }.bind(this),this.$.mainContent);  
       this.changeView(1);
 	  },
-    changeView : function(x){
-	    
-	   var tmp = new Date(this.currentYear,this.currentMonth,1);
+    changeView : function(x){	    
+	 var tmp = new Date(this.currentYear,this.currentMonth,1);
      tmp.setMonth(this.currentMonth+x);
-		 this.currentMonth = tmp.getMonth();
+	 this.currentMonth = tmp.getMonth();
      this.currentYear = tmp.getFullYear();
-
-      this.fire('month-change',{
-        date: this.date
-      });
-     
+     this.fire('month-change',{
+        date: tmpDate
+     });     
      this.generateTable();
      this.separator = [0,1,2,3,4,5];
 	 },

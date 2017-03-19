@@ -581,17 +581,15 @@
      }.bind(this),this.$.mainContent);  
       this.changeView(1);
 	  },
-    changeView : function(x){
-	    
-	   var tmp = new Date(this.currentYear,this.currentMonth,1);
+    changeView : function(x){	    
+	 
+	 var tmp = new Date(this.currentYear,this.currentMonth,1);
      tmp.setMonth(this.currentMonth+x);
-		 this.currentMonth = tmp.getMonth();
+	 this.currentMonth = tmp.getMonth();
      this.currentYear = tmp.getFullYear();
-
-      this.fire('month-change',{
-        date: this.date
-      });
-     
+     this.fire('month-change',{
+        date: tmpDate
+     });     
      this.generateTable();
      this.separator = [0,1,2,3,4,5];
 	 },
