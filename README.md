@@ -77,7 +77,12 @@ Answer is, you can update the disable dates on `month-change` event as shown bel
  
 ```javascript
     document.querySelector('#someid').addEventListener('month-change', function (e) {
-        document.querySelector('#someid').disabledDays = [7,8]
+         //takecare month numbering starts from 0
+         if(e.detail.date.getMonth() == 4){
+		        document.querySelector('#someid').disabledDays = [1]
+		      }else{
+		         document.querySelector('#someid').disabledDays = [7,8]
+		      }
     })
 ```
  
