@@ -597,9 +597,17 @@
      tmp.setMonth(this.currentMonth+x);
 	 this.currentMonth = tmp.getMonth();
      this.currentYear = tmp.getFullYear();
+<<<<<<< HEAD
      this.fire('month-change',{
         date: tmpDate
      });     
+=======
+
+      this.fire('month-change',{
+        date: tmpDate
+      });
+     
+>>>>>>> origin/master
      this.generateTable();
      this.separator = [0,1,2,3,4,5];
 	 },
