@@ -4,7 +4,7 @@
     "Manohar-Gunturu <gunturumanohar2@gmail.com>"
   ],
   "description": "Webcomponent(Polymer 1.x) which can be used as date picker or calender",
-  "main": "calender-lite.html",
+  "main": "calendar-lite.html",
   "keywords": [
     "Polymer",
     "Webcomponents",
