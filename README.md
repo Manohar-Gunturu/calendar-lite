@@ -23,8 +23,8 @@ It has two themes one is calendar-lite and another is calendar-lite-dark(dark th
 ```
 <custom-element-demo>
   <template>
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../calendar-lite.html">
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="calendar-lite.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -38,8 +38,8 @@ It has two themes one is calendar-lite and another is calendar-lite-dark(dark th
 ```
 <custom-element-demo>
   <template>
-    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../../calendar-lite-dark.html">
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="calendar-lite-dark.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
