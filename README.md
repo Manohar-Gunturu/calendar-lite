@@ -7,7 +7,7 @@ Multi select date picker or calendar
 
 Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to play with it.
 
-##Features
+## Features
 
 1. Set min and max date,
 2. Select Multiple dates(consequent or random)
@@ -23,8 +23,8 @@ It has two themes one is calendar-lite and another is calendar-lite-dark(dark th
 ```
 <custom-element-demo>
   <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="calendar-lite.html">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../calendar-lite.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -38,8 +38,8 @@ It has two themes one is calendar-lite and another is calendar-lite-dark(dark th
 ```
 <custom-element-demo>
   <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="calendar-lite-dark.html">
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../calendar-lite-dark.html">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
