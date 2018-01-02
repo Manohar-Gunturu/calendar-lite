@@ -1,9 +1,10 @@
-  <link rel="import" href="../polymer/polymer-element.html">
+  <link rel="import" href="../polymer/polymer.html">  
   <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-  <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-  <link rel="import" href="../bower_components/iron-iconset-svg/iron-iconset-svg.html">
+  <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="../iron-iconset-svg/iron-iconset-svg.html">
 
- <!-- Icon set for left and right icons -->
+
+<!-- Icon set for left and right icons -->
 
 <iron-iconset-svg name="my-icons" size="24">
   <svg>
@@ -12,19 +13,21 @@
        <g id="right"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></g>
     </defs>
   </svg>
-</iron-iconset-svg> 
-  
-<dom-module id="calendar-lite">
+</iron-iconset-svg>
+
+<dom-module id="calendar-lite-dark">
   <template>
-    <style>
-      
+  
+  <style is="custom-style">
+   
+   
+   
    :host{
      display: inline-block;
      width:312px;
-	 -webkit-font-smoothing: antialiased;
-	 font-family: Helvetica, Arial, sans-serif;
-	 border: 1px solid #eee;
-	 --my-elem-primary:#3acfe3;
+	   -webkit-font-smoothing: antialiased;
+	   font-family: Helvetica, Arial, sans-serif;
+	   border: 1px solid #eee;
      text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
      text-rendering: optimizeLegibility !important;
      -webkit-font-smoothing: antialiased !important;
@@ -53,7 +56,7 @@
 
    @-webkit-keyframes scale-up {
      0%{ -webkit-transform:scale(0); transform:scale(0) }  
-    100% { -webkit-transform:scale(1,1); transform:scale(1,1) }
+    100% { -webkit-transform:scale(1); transform:scale(1) }
    }
 
    @-webkit-keyframes slide-left {
@@ -97,23 +100,22 @@
   /* color the .dateSticker on selected */  
 
   .dateSticker.selected{
-    background: var(--my-elem-primary);
-    color: #fff;
+     background: #80cbc4;
+    color: #333;
    }
 
   /* .mainHeader bg color to primary color */
 
    .mainHeader{
     padding: 10px;
-    border-bottom: 1px solid #ddd;
-    background: var(--my-elem-primary);
+     background: #555555;
     color: #fff;
     }
 
   /* disabled .dateSticker color and pointer */
     
    .dateSticker[disabled]{
-    color:#9d9898;
+    color:#9d9898 !important;
     cursor: not-allowed !important;
    }
 
@@ -134,9 +136,10 @@
       font-size: 15px;
       justify-content: center;
       align-items: center;
-      color: #474e54;
+      color: #f0f0f0;
     }
 
+  
     .dayNames,.dates{
     @apply(--layout-justified);
     }
@@ -144,6 +147,7 @@
     .dates .dateSticker{
       border-radius: 50%;
       padding: 4px;
+      color: #fff;
       text-align: center;
       width: 24px;
       @apply(--layout-horizontal);
@@ -155,17 +159,11 @@
       font-size: 14px;	
     }
   
-    .notextselect,.dateSticker{
-	  -webkit-user-select: none;
-	  -moz-user-select: none;
-	  -ms-user-select: none;
-	  user-select: none;
-	}
-	
+    
     .dayNames>div{
       padding: 12px;
       font-size: 12px;
-      color: #474e54;
+      color:rgba(255, 255, 255, 0.72);
     }
     
     .menu_item{
@@ -182,15 +180,17 @@
       overflow:auto;
     }
 
-    .monthwrap{
+    .mothwrap{
       @apply(--layout-horizontal);
       @apply(--layout-wrap);
       justify-content: center;
     }
 
-    .monthwrap div{
+    .mothwrap div{
       margin: 4px;
-    }    
+    }
+    
+    
     
     .dateItem{
       border: 1px solid transparent;
@@ -198,8 +198,10 @@
       font-size: 15px;
       padding: 8px 12px;
       border-radius: 4px;
+          color: #fff;
     }
   
+    
 
     .flex-wrap div{
       padding: 8px;
@@ -207,16 +209,20 @@
       font-size: 13px;
     }
 
+    
+
     .pageContainer{
           padding-bottom: 6px;
     }
+
+  
 
     .yearContainer{
       cursor: pointer;
       @apply(--layout-horizontal);
       @apply(--layout-center);
       font-size:15px;
-      color:rgba(255, 255, 255, 0.92);
+     color:rgba(255, 255, 255, 0.92);
       padding: 6px;
     }
 
@@ -225,9 +231,17 @@
       font-size: 2em;
       font-weight: bold;
     }
-    </style>
 
-	
+    .notextselect,.dateSticker,.dateItem{
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
+   
+  </style>
+
+
   <!-- Main header date,month,year are compund binded to selected date -->
 
    <div class="mainHeader" style="">
@@ -239,16 +253,16 @@
        </div>
    </div>
 
-  <div>
+  <div style="background: #424242;">
 
     <!-- sub header with  left, right icon and present viewing month  -->
-    <div class="container menu flex-horizontal" style="padding: 4px 0px;">	  
+    <div class="container menu flex-horizontal" style="padding: 4px 0px;color: #fff;">	  
       <paper-icon-button on-tap="_swipePrevMonth" icon="my-icons:left"></paper-icon-button>	 
       <div class="flexchild"> <span></span> 
       <span>{{monthFormat(currentMonth)}}</span> 
-      <span  style="margin-left:4px;"> {{yearFormat(currentYear)}} </span> </div>	  
-        <paper-icon-button on-tap="_swipeNextMonth" icon="my-icons:right"></paper-icon-button>	  
-	  </div>
+      <span style="margin-left:4px;"> {{yearFormat(currentYear)}} </span> </div>	  
+      <paper-icon-button on-tap="_swipeNextMonth" icon="my-icons:right"></paper-icon-button>	  
+	</div>
 	
 
    <!-- .pageContainer contains calendar, months list and years list  -->
@@ -260,7 +274,7 @@
         <div id="yearList" class="page" style="display:none;">
         <div class="flex-wrap">
           <template is="dom-repeat" items="{{years}}">
-            <div class="dateItem notextselect" on-tap="_setYear">{{item}}</div>
+            <div class="dateItem" on-tap="_setYear">{{item}}</div>
           </template>
         </div>
         </div>
@@ -268,9 +282,9 @@
         <!-- months list -->    
 
         <div id="monthsList" class="page" style="display:none;">
-          <div class="monthwrap">
+          <div class="mothwrap">
           <template is="dom-repeat" items='["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"]'>
-            <div class="dateItem notextselect" on-tap="_setMonth">{{item}}</div>
+            <div class="dateItem" on-tap="_setMonth">{{item}}</div>
           </template>
           </div>
         </div>
@@ -303,7 +317,9 @@
           </div> 
         </div>
       </div> 
+
     </div>
+	
   </template>
-<script src="calendar-lite.js"> </script>
-</dom-module>
+  <script src="calendar-lite.js"> </script>
+</dom-module> 
