@@ -1,36 +1,14 @@
 {
   "name": "calendar-lite",
-  "authors": [
-    "Manohar-Gunturu <gunturumanohar2@gmail.com>"
-  ],
-  "description": "Webcomponent(Polymer 1.x) which can be used as date picker or calender",
-  "main": "calendar-lite.html",
-  "keywords": [
-    "Polymer",
-    "Webcomponents",
-    "calendar",
-    "Date",
-    "picker"
-  ],
-  "license": "MIT",
-  "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "description": "Calendar Element lite-weight",
+  "main": "index.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-    "paper-icon-button": "PolymerElements/paper-icon-button#^1.0.0",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
-    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.0"    
+    "polymer": "Polymer/polymer#^2.0.0",
+	"paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^2.0.0"
   },
   "devDependencies": {
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   }
-  
-
-
 }
