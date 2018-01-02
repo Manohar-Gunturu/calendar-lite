@@ -76,13 +76,14 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
 
    ready() {
       // generate 6 x 7 table
-        super.ready(); // for 2.0 class-based elements only
+      super.ready(); // for 2.0 class-based elements only
 
 	  this.generateTable();
       this._animationEvent = this._whichAnimationEnd();
       
-      this.multiple.push(this.date.getDate()+","+this.date.getMonth()+","+this.date.getFullYear());
-
+	  if(!this.isDisabled(this.date.getDate())){
+		this.multiple.push(this.date.getDate()+","+this.date.getMonth()+","+this.date.getFullYear());
+	  }	
       this.currentYear = this.date.getFullYear();
       this.currentMonth = this.date.getMonth();  
 	  
@@ -96,7 +97,7 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
 	  var tmpArray = [];
 	  if(this.maxDate != null && this.minDate != null){
           this._generateYears((this.minDate).getFullYear(),(this.maxDate).getFullYear())   
-	  }else{
+	  } else{
 		  this._generateYears(this.currentYear-101, this.currentYear+30 ,tmpArray)
 	  }
      //discard tmpArray
@@ -120,14 +121,15 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
   
   generateTable(){
 
-      // if date attribute is not set take today date
-      if(this.date == undefined){
-        this.date = new Date();
-      }     
-       
-	  //clone into tmpDate  
-      this.tmpDate = new Date(this.currentYear,this.currentMonth,1);    
       
+	  // if date attribute is not set take today date
+      if(this.date == undefined){
+		  this.date = new Date();		        
+      }    
+      
+	  //clone into tmpDate  
+      this.tmpDate = new Date(this.currentYear,this.currentMonth,1);
+	  
 	  //tmpArray contains 6x7(42) items 
 	  var tmpArray = [];
 	  this.cf = 0;
@@ -139,7 +141,7 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
 	  //fill days and check disable dates
       for(var i=1;i<=this.monthDays(this.tmpDate);i++){
         this.tmpDate.setDate(i);
-        if((this.minDate != null && this.tmpDate<=this.minDate) || (this.maxDate != null && this.tmpDate>=this.maxDate) || this.disabledWeekDay.indexOf(this.days_names[(this.tmpDate).getDay()]) != -1 || (this.disabledDays).indexOf(i) != -1){
+        if(this.isDisabled(i)){
           tmpArray.push({text:i,isDisabled:true,i:this.cf++});
         }else{
           tmpArray.push({text:i,isDisabled:false,i:this.cf++});
@@ -155,17 +157,30 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
       tmpArray = null;
     }
     
+	isDisabled(i){
+			return ( (this.minDate != null && this.tmpDate<=this.minDate) || 
+			(this.maxDate != null && this.tmpDate>=this.maxDate) || 
+			this.disabledWeekDay.indexOf(this.days_names[(this.tmpDate).getDay()]) != -1 || 
+			(this.disabledDays).indexOf(i) != -1 )
+	}
+	
 	_getDayClass(s,d){
-     if(this.multiSelect != null){
+      
+	  if(this.isDisabled(this.date.getDate())){
+		  return "dateSticker";
+	  }
+	  
+	  if(this.multiSelect != null){
          if(this.multiple.indexOf(s+","+this.currentMonth+","+this.currentYear) > -1){
              return "dateSticker  selected";
          }
       }
+	  
       if(this.date.getDate() == s && this.date.getMonth() == this.currentMonth && this.date.getFullYear()== this.currentYear){
-      return "dateSticker selected"; 
+         return "dateSticker selected"; 
+      }
+	  return "dateSticker";
     }
-     return "dateSticker";
-   }
     _setDate(e){
       var target = e.target;
       var f = e.model.day;    
