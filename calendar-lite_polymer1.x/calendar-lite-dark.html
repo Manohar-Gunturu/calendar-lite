@@ -324,7 +324,6 @@
   
   <script>
 
-
   (function() {
 
     var days_names = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -431,9 +430,9 @@
     }
   },
   isDisabled: function(i){
-			return ( (this.minDate != null && this.tmpDate<=this.minDate) || 
-			(this.maxDate != null && this.tmpDate>=this.maxDate) || 
-			this.disabledWeekDay.indexOf(this.days_names[(this.tmpDate).getDay()]) != -1 || 
+			return ( (this.minDate != null && tmpDate<=this.minDate) || 
+			(this.maxDate != null && tmpDate>=this.maxDate) || 
+			this.disabledWeekDay.indexOf(days_names[(tmpDate).getDay()]) != -1 || 
 			(this.disabledDays).indexOf(i) != -1 )
 	},
   generateTable : function(){
@@ -644,6 +643,6 @@
       }	 
 	}); 
  });
- })();  
+ })(); 
   </script>	
 </dom-module> 
