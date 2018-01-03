@@ -6,6 +6,7 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
 	    return {
 			date: {
 			  type: Date,
+			  value: new Date()
 			},
 			currentMonth: {
 				type: Number
@@ -75,15 +76,18 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
    }
 
    ready() {
-      // generate 6 x 7 table
       super.ready(); // for 2.0 class-based elements only
 
+	  // generate 6 x 7 table so each cell is a date and each row is a week 
+	  // it just works on the logic of how a wall calendar looks like.
 	  this.generateTable();
       this._animationEvent = this._whichAnimationEnd();
-      
+
+	  // in multiple date selection - insert today date if it in not in the disabled days list	
 	  if(!this.isDisabled(this.date.getDate())){
 		this.multiple.push(this.date.getDate()+","+this.date.getMonth()+","+this.date.getFullYear());
-	  }	
+	  }
+	  
       this.currentYear = this.date.getFullYear();
       this.currentMonth = this.date.getMonth();  
 	  
@@ -122,12 +126,7 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
   generateTable(){
 
       
-	  // if date attribute is not set take today date
-      if(this.date == undefined){
-		  this.date = new Date();		        
-      }    
-      
-	  //clone into tmpDate  
+	  //create tmpDate from starting of this month  
       this.tmpDate = new Date(this.currentYear,this.currentMonth,1);
 	  
 	  //tmpArray contains 6x7(42) items 
