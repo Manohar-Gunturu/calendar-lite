@@ -9,15 +9,14 @@ Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to
 
 ## Features
 
-1. Set min and max date,
+1. Set min, max date or default date,
 2. Select Multiple dates(consequent or random)
-3. Disable week days(example disable all Sundays)
+3. Disable week days(example disable all Sundays or Fridays)
 4. Disable an array of dates(example 1st and 3rd of this month)
 5. triggers an event on date change(So you can update the value of an input field)
 6. triggers an event on month change(So you can set different disable dates for different months)
-7. Customizable theme
+7. Customizable theme, if you import calendar-lite-dark.html it gives dark theme.
 
-It has two themes one is calendar-lite and another is calendar-lite-dark(dark theme).
 
 <!---
 ```
@@ -110,6 +109,14 @@ you can provide min and max dates, such that calendar-lite will disable the rema
  ```    
 min-date and max-date format should be yyyy-mm-dd.
 
+By default present(today) day is selected, you can set a default date as shown below 
+
+```html
+    <calendar-lite id="someid" date="01/07/2015">
+    </calendar-lite>
+ ```    
+
+
 ## To change theme
 
 To change main header color of calendar-lite
@@ -119,7 +126,7 @@ To change main header color of calendar-lite
     <calendar-lite main-color="#E91E63"  id="someid"></calendar-lite>
 
 ```
-You can use dark theme calendar by importing `calendar-lite-dark.html` instead of `calendar-lite.html`.
+You can use dark theme calendar by importing `calendar-lite-dark.html` instead of `calendar-lite.html`
 
 ```html
     <calendar-lite-dark  id="someid"></calendar-lite-dark>
