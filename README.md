@@ -1,5 +1,7 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/Manohar-Gunturu/calendar-lite)
 
+[![Bower](https://img.shields.io/bower/l/bootstrap.svg)]()
+
 
 # \<calendar-lite\>
 
@@ -129,5 +131,5 @@ To change main header color of calendar-lite
 You can use dark theme calendar by importing `calendar-lite-dark.html` instead of `calendar-lite.html`
 
 ```html
-    <calendar-lite-dark  id="someid"></calendar-lite-dark>
+    <calendar-lite  id="someid"></calendar-lite>
  ```
