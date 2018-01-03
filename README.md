@@ -45,7 +45,7 @@ Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to
 ```
 -->
 ```html
-<calendar-lite-dark  id="someid"  multi-select='{"max":3,"consequent":true}'></calendar-lite-dark>
+<calendar-lite  id="someid"  multi-select='{"max":3,"consequent":true}'></calendar-lite>
 ```
 
 
