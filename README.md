@@ -1,6 +1,4 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/Manohar-Gunturu/calendar-lite)
-
-[![Bower](https://img.shields.io/bower/l/bootstrap.svg)]()
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/Manohar-Gunturu/calendar-lite) [![Bower](https://img.shields.io/bower/l/bootstrap.svg)]()
 
 
 # \<calendar-lite\>
