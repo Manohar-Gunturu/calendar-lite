@@ -83,9 +83,13 @@ class CalendarLite extends Polymer.GestureEventListeners(Polymer.Element){
 	  this.generateTable();
       this._animationEvent = this._whichAnimationEnd();
 
-	  // in multiple date selection - insert today date if it in not in the disabled days list	
-	  if(!this.isDisabled(this.date.getDate())){
-		this.multiple.push(this.date.getDate()+","+this.date.getMonth()+","+this.date.getFullYear());
+	  // in multiple date selection - insert default dates	
+	  if(this.multiSelect != null &&  !this.isDisabled(this.date.getDate())){
+	     var prev = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate());		  
+		 for(var i=0;i<this.multiSelect.max;i++){
+		   this.multiple.push(prev.getDate()+","+prev.getMonth()+","+prev.getFullYear());
+		   prev.setDate(prev.getDate() + 1);		  
+		 }
 	  }
 	  
       this.currentYear = this.date.getFullYear();
