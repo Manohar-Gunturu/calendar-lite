@@ -352,6 +352,7 @@
 	  properties: {
         date: {
           type: Date,
+		  value: new Date()
         },
         currentMonth: {
             type: Number
@@ -399,8 +400,11 @@
       this.generateTable();
       this._animationEvent = this._whichAnimationEnd();
       
-      multiple.push(this.date.getDate()+","+this.date.getMonth()+","+this.date.getFullYear());
-
+	  // in multiple date selection - insert today date if it in not in the disabled days list	
+	  if(!this.isDisabled(this.date.getDate())){
+		multiple.push(this.date.getDate()+","+this.date.getMonth()+","+this.date.getFullYear());
+	  }
+      
       this.currentYear = this.date.getFullYear();
       this.currentMonth = this.date.getMonth();  
 	  
@@ -420,6 +424,12 @@
      //discard tmpArray
      tmpArray = null;
   },
+  isDisabled: function(i){
+			return ( (this.minDate != null && tmpDate<=this.minDate) || 
+			(this.maxDate != null && tmpDate>=this.maxDate) || 
+			this.disabledWeekDay.indexOf(this.days_names[(tmpDate).getDay()]) != -1 || 
+			(this.disabledDays).indexOf(i) != -1 )
+	},
   _getUpdated:function(d,type){
     if(type == 'year'){
        return this.date.getFullYear();
@@ -455,7 +465,7 @@
 	  //fill days and check disable dates
       for(var i=1;i<=tmpDate.monthDays();i++){
         tmpDate.setDate(i);
-        if((this.minDate != null && tmpDate<=this.minDate) || (this.maxDate != null && tmpDate>=this.maxDate) || this.disabledWeekDay.indexOf(days_names[(tmpDate).getDay()]) != -1 || (this.disabledDays).indexOf(i) != -1){
+        if(this.isDisabled(i)){
           tmpArray.push({text:i,isDisabled:true,i:cf++});
         }else{
           tmpArray.push({text:i,isDisabled:false,i:cf++});
@@ -471,15 +481,20 @@
       tmpArray = null;
   },
   _getDayClass:function(s,d){
-     if(this.multiSelect != null){
+  
+    if(this.isDisabled(this.date.getDate())){
+		  return "dateSticker";
+	}
+  
+    if(this.multiSelect != null){
          if(multiple.indexOf(s+","+this.currentMonth+","+this.currentYear) > -1){
              return "dateSticker  selected";
          }
-      }
+    }
     if(this.date.getDate() == s && this.date.getMonth() == this.currentMonth && this.date.getFullYear()== this.currentYear){
       return "dateSticker selected"; 
     }
-     return "dateSticker";
+    return "dateSticker";
   },
    _setDate: function(e){
       var target = e.target;
