@@ -45,9 +45,9 @@ Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to
 ```
 -->
 ```html
-<calendar-lite  id="someid"  multi-select='{"max":3,"consequent":true}'></calendar-lite>
+<calendar-lite  id="someid" disabled-week-day='["Fri","Sun"]' multi-select='{"max":3,"consequent":true}'></calendar-lite>
 ```
-
+Note: To work with dark theme import calendar-lite-dark.html rather than calendar-lite.html
 
 
 You can attach date-change event listener to it as shown below
