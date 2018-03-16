@@ -1,9 +1,9 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/Manohar-Gunturu/calendar-lite) [![Bower](https://img.shields.io/bower/l/bootstrap.svg)]()
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Manohar-Gunturu/calendar-lite) [![Bower](https://img.shields.io/bower/l/bootstrap.svg)]()
 
 
 # \<calendar-lite\>
 
-Multi select date picker or calendar
+Multi select date picker or calendar `bower install calendar-lite` 
 
 Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to play with it.
 
