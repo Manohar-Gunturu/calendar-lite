@@ -1,0 +1,7 @@
+{
+  "name": "calendar-lite",
+  "version": "1.7.5",
+  "description": "Multi select date picker calendar WebComponent - built with Polymer",
+  "homepage": "https://github.com/Manohar-Gunturu/calendar-lite",
+  "license" : "see license in LICENSE"
+}
