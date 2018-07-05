@@ -1,9 +1,7 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Manohar-Gunturu/calendar-lite) [![Bower](https://img.shields.io/bower/l/bootstrap.svg)]()
-
-
+Polymer 3 version for https://github.com/Manohar-Gunturu/calendar-lite
 # \<calendar-lite\>
 
-Multi select date picker or calendar `bower install calendar-lite` 
+Multi select date picker or calendar `npm install git+https://github.com/daniel-tabarcea/calendar-lite`
 
 Calendar-lite is a Webcomponent build with Polymer. It gives a nice interface to play with it.
 
@@ -58,22 +56,22 @@ You can attach date-change event listener to it as shown below
         console.log(e.detail.date); //update input values...
     })
 ```
- 
+
 You can disable week days by passing an array as shown below.
 ```html
     <calendar-lite id="someid" disabled-week-day='["Fri","Sun"]'></calendar-lite>
 ```
- 
+
 You can disable a bunch of days by passing an array as shown below.
 
 ```html
     <calendar-lite id="someid" disabled-days="[4,20,27]"></calendar-lite>
  ```
- 
+
 Here you may get a doubt that "How to disable different dates for different months?"
 
 Answer is, you can update the disable dates on `month-change` event as shown below.
- 
+
 ```javascript
     document.querySelector('#someid').addEventListener('month-change', function (e) {
          //takecare month numbering starts from 0
@@ -84,14 +82,14 @@ Answer is, you can update the disable dates on `month-change` event as shown bel
 		      }
     })
 ```
- 
+
 You can select multiple days by passing an Object to `multi-select` attribute as shown below.
 
 ```html
     <calendar-lite id="someid" multi-select='{"max":3,"consequent":false}'  disabled-week-day='["Fri"]'  disabled-days="[2,3,4]">
     </calendar-lite>
  ```
- 
+
 To get the selected multiple dates, use below listener
 
 ```javascript
@@ -99,22 +97,22 @@ To get the selected multiple dates, use below listener
         console.log(e.detail.dates); // array of selected dates
     })
 ```
- 
+
 In Object multi-select: `max` is nothing but maximum number of days that can be selected, if `consequent` is true it will select the days in consequent.
 
 you can provide min and max dates, such that calendar-lite will disable the remaining dates.
 ```html
     <calendar-lite id="someid" min-date="2016,12,9" multi-select='{"max":3,"consequent":false}'  disabled-week-day='["Fri"]'  disabled-days="[2,3,4]">
     </calendar-lite>
- ```    
+ ```
 min-date and max-date format should be yyyy-mm-dd.
 
-By default present(today) day is selected, you can set a default date as shown below 
+By default present(today) day is selected, you can set a default date as shown below
 
 ```html
     <calendar-lite id="someid" date="01/07/2015">
     </calendar-lite>
- ```    
+ ```
 
 
 ## To change theme
