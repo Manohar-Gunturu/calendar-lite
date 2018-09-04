@@ -25,12 +25,12 @@
    </calendar-lite>
 
     <div style="width: 400px">
-      <datepicker-lite label="Paper datepicker"></datepicker-lite>
+      <datepicker-lite always-float-label="Paper datepicker" ></datepicker-lite>
     </div>
   <script>
 
     document.querySelector('#excalendar').addEventListener('date-change', function (e) {
-	    console.log(e);
+	    // console.log(e);
         document.querySelector('h2').innerHTML = e.detail.date;
     })
 
@@ -39,7 +39,7 @@
     })
 
     document.querySelector('#excalendar').addEventListener('multiselect', function (e) {
-        console.log(e.detail.dates);
+        // console.log(e.detail.dates);
     })
 
   </script>

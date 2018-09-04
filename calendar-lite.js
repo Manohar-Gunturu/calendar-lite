@@ -3,6 +3,7 @@ import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
+import '@polymer/paper-button/paper-button.js';
 
 class CalendarLite extends GestureEventListeners(PolymerElement) {
   static get template() {
@@ -227,6 +228,11 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
             font-size: 2em;
             font-weight: bold;
           }
+          
+          .clear-btn{
+            background: var(--my-elem-primary);
+            color: #fff;
+          }
           </style>
 
 
@@ -297,10 +303,11 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
                 <template is="dom-repeat" items="{{separator}}" as="row">
                   <div class="dates">
                   <template is="dom-repeat" items="{{_getDays(row,separator)}}" as="day">
-                    <div on-tap="_setDate" class$="{{_getDayClass(day.text,date)}}" disabled$="{{day.isDisabled}}">{{day.text}}</div>
+                    <div on-tap="_setDate" class$="{{_getDayClass(day.text, currentDay, currentMonth, currentYear)}}" disabled$="{{day.isDisabled}}" tabindex="1">{{day.text}}</div>
                   </template>
                   </div>
                 </template>
+                <paper-button raised class="clear-btn" on-tap="_clearData">Clear</paper-button>
                 </div>
                 </div>
               </div>
@@ -317,11 +324,15 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
     return {
       date: {
         type: Date,
+        notify: true,
         value: () => new Date(),
         observer: '_populate'
       },
       currentMonth: {
         type: Number
+      },
+      currentDay: {
+          type: Number
       },
       minDate: {
         type: Date,
@@ -508,6 +519,12 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
     this.dispatchEvent(event);
   }
 
+  _clearData(){
+    let newDate = new Date("1970");
+    this.set('date', newDate);
+    this._populate(newDate, null);
+  }
+
   _setYear(e) {
     this.currentYear = e.model.item;
     this.generateTable();
@@ -553,7 +570,9 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
   _populate(newDate, oldDate) {
     this.currentMonth = newDate.getMonth();
     this.currentYear = newDate.getFullYear();
-
+    this.currentDay = newDate.getDay();
+    this.generateTable();
+    this.separator = [0, 1, 2, 3, 4, 5];
     if (!oldDate) {
       // don't dispatch the date changed event if the element is just initialising
       return;
