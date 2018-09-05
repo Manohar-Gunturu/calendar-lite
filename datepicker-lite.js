@@ -16,8 +16,14 @@ class DatePickerLite extends PolymerElement {
     // language=HTML
     return html`
       <style>
+        
+        :host{
+          display: block;
+          position: absolute;
+        }
+
         paper-input-container {
-          max-width: 220px;
+          max-width: 225px;
         }
 
         paper-dropdown-menu {
@@ -25,8 +31,13 @@ class DatePickerLite extends PolymerElement {
         }
 
         .paper-input-input input {
+          font-size: inherit;
           border: 0;
           text-align: center;
+        }
+
+        iron-icon {
+          cursor: pointer;
         }
 
         *[hidden] {
@@ -34,15 +45,15 @@ class DatePickerLite extends PolymerElement {
         }
       </style>
 
-      <paper-input-container always-float-label="[[alwaysFloatLabel]]"
+      <paper-input-container always-float-label="true"
                              no-label-float="[[noLabelFloat]]"
                              required$="[[required]]" invalid="{{invalid}}" error-message="Invalid date.">
         <label hidden$=[[!label]] slot="label">[[label]]</label>
-        <paper-icon-button slot="prefix" icon="date-range" alt="toggle" title="toggle"
-                           on-tap="toggleCalendar"></paper-icon-button>
+        <iron-icon slot="prefix" icon="date-range" alt="toggle" title="toggle"
+                   on-tap="toggleCalendar"></iron-icon>
         <div slot="input" class="paper-input-input">
-          <input value="{{monthInput::input}}" placeholder="month" type="number" max="12" style="width: 53px">-
-          <input value="{{dayInput::input}}" placeholder="day" type="number" max="31" style="width: 50px">-
+          <input value="{{monthInput::input}}" placeholder="month" type="number" max="12" style="width: 60px">/
+          <input value="{{dayInput::input}}" placeholder="day" type="number" max="31" style="width: 50px">/
           <input value="{{yearInput::input}}" placeholder="year" type="number" style="width: 50px">
         </div>
       </paper-input-container>
