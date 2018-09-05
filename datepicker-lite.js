@@ -1,8 +1,9 @@
 'use strict';
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/iron-icons/iron-icons.js';
+
 import './calendar-lite.js';
 import moment from "moment";
 
@@ -12,42 +13,44 @@ import moment from "moment";
  */
 class DatePickerLite extends PolymerElement {
   static get template() {
+    // language=HTML
     return html`
       <style>
-        paper-input-container{
+        paper-input-container {
           max-width: 220px;
         }
-      
+
         paper-dropdown-menu {
           width: 100%;
         }
-        
-        .paper-input-input input{
+
+        .paper-input-input input {
           border: 0;
           text-align: center;
         }
-        
+
         *[hidden] {
           display: none;
         }
       </style>
 
       <paper-input-container always-float-label="[[alwaysFloatLabel]]"
-                           no-label-float="[[noLabelFloat]]"
-                           required$="[[required]]" invalid="{{invalid}}" error-message="Invalid date.">
+                             no-label-float="[[noLabelFloat]]"
+                             required$="[[required]]" invalid="{{invalid}}" error-message="Invalid date.">
         <label hidden$=[[!label]] slot="label">[[label]]</label>
-        <paper-icon-button slot="prefix" icon="date-range" alt="toggle" title="toggle" on-tap="toggleCalendar"></paper-icon-button>
+        <paper-icon-button slot="prefix" icon="date-range" alt="toggle" title="toggle"
+                           on-tap="toggleCalendar"></paper-icon-button>
         <div slot="input" class="paper-input-input">
           <input value="{{monthInput::input}}" placeholder="month" type="number" max="12" style="width: 53px">-
           <input value="{{dayInput::input}}" placeholder="day" type="number" max="31" style="width: 50px">-
           <input value="{{yearInput::input}}" placeholder="year" type="number" style="width: 50px">
         </div>
       </paper-input-container>
-      
+
       <calendar-lite slot="dropdown-content" on-date-change="datePicked" date="{{inputDate}}" hidden$="{{hidden}}">
-    
+
       </calendar-lite>
-      
+
     `;
   }
 
@@ -81,8 +84,8 @@ class DatePickerLite extends PolymerElement {
         type: Number
       },
       invalid: {
-          type: Boolean,
-          value: false
+        type: Boolean,
+        value: false
       },
       hidden: {
         type: Boolean,
@@ -124,7 +127,7 @@ class DatePickerLite extends PolymerElement {
     return;
   }
 
-  computeDate(month, day, year){
+  computeDate(month, day, year) {
     if (typeof month === 'undefined' || typeof day === 'undefined' || typeof year === 'undefined' || year.length < 4) {
       return;
     }
@@ -142,7 +145,7 @@ class DatePickerLite extends PolymerElement {
     this.maskedDate = this._getDateString(this.date);
   }
 
-  toggleCalendar(){
+  toggleCalendar() {
     this.set('hidden', !this.hidden);
   }
 

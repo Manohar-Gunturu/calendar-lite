@@ -1,80 +1,131 @@
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
+import {GestureEventListeners} from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
 import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-styles/element-styles/paper-material-styles.js';
 
 class CalendarLite extends GestureEventListeners(PolymerElement) {
   static get template() {
+    // language=HTML
     return html`
+      <style include="paper-material-styles">
+      </style>
       <!-- Icon set for left and right icons -->
 
       <iron-iconset-svg name="my-icons" size="24">
         <svg>
           <defs>
-            <g id="left"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></g>
-            <g id="right"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></g>
+            <g id="left">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+            </g>
+            <g id="right">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+            </g>
           </defs>
         </svg>
       </iron-iconset-svg>
 
       <style>
 
-        :host{
+        :host {
           display: inline-block;
-          width:312px;
-        -webkit-font-smoothing: antialiased;
-        font-family: Helvetica, Arial, sans-serif;
-        border: 1px solid #eee;
-        --my-elem-primary:#3acfe3;
-          text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+          width: 312px;
+          -webkit-font-smoothing: antialiased;
+          font-family: Helvetica, Arial, sans-serif;
+          border: 1px solid #eee;
+          --my-elem-primary: #3acfe3;
+          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
           text-rendering: optimizeLegibility !important;
           -webkit-font-smoothing: antialiased !important;
         }
 
-          /*Animation while showing next or previous months*/
+        /*Animation while showing next or previous months*/
 
-        .slide-right{
+        .slide-right {
           animation: slide-right 0.4s linear forwards;
-          visibility:hidden;
+          visibility: hidden;
           -webkit-animation: slide-right 0.4s linear forwards;
-          }
+        }
 
-        .slide-left{
+        .slide-left {
           animation: slide-left 0.4s linear forwards;
-          visibility:hidden;
+          visibility: hidden;
           -webkit-animation: slide-left 0.4s linear forwards;
-          }
+        }
 
-          /* Animation while showing years and months*/
+        /* Animation while showing years and months*/
 
-        .scale-up{
+        .scale-up {
           animation: scale-up 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
           -webkit-animation: scale-up 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         @-webkit-keyframes scale-up {
-          0%{ -webkit-transform:scale(0); transform:scale(0) }
-          100% { -webkit-transform:scale(1,1); transform:scale(1,1) }
+          0% {
+            -webkit-transform: scale(0);
+            transform: scale(0)
+          }
+          100% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1)
+          }
         }
 
         @-webkit-keyframes slide-left {
-          0%{ -webkit-transform: translateX(0%); transform: translateX(0%); visibility:hidden  }
-          30%{ -webkit-transform: translateX(3%); transform: translateX(3%); visibility:hidden }
-          60%{ -webkit-transform: translateX(-3%); transform: translateX(-3%); visibility:hidden }
-          90%{ -webkit-transform: translateX(0%); transform: translateX(0%); visibility:visible }
-          100% { -webkit-transform: translateX(0%); visibility:visible }
+          0% {
+            -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+            visibility: hidden
+          }
+          30% {
+            -webkit-transform: translateX(3%);
+            transform: translateX(3%);
+            visibility: hidden
+          }
+          60% {
+            -webkit-transform: translateX(-3%);
+            transform: translateX(-3%);
+            visibility: hidden
+          }
+          90% {
+            -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+            visibility: visible
+          }
+          100% {
+            -webkit-transform: translateX(0%);
+            visibility: visible
+          }
         }
 
         @-webkit-keyframes slide-right {
-          0%{ -webkit-transform: translateX(0%); transform: translateX(0%); visibility:hidden  }
-          30%{ -webkit-transform: translateX(-3%); transform: translateX(-3%); visibility:hidden }
-          60%{ -webkit-transform: translateX(3%); transform: translateX(3%); visibility:hidden }
-          90%{ -webkit-transform: translateX(0%); transform: translateX(0%); visibility:visible }
-          100% { -webkit-transform: translateX(0%); visibility:visible}
+          0% {
+            -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+            visibility: hidden
+          }
+          30% {
+            -webkit-transform: translateX(-3%);
+            transform: translateX(-3%);
+            visibility: hidden
+          }
+          60% {
+            -webkit-transform: translateX(3%);
+            transform: translateX(3%);
+            visibility: hidden
+          }
+          90% {
+            -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+            visibility: visible
+          }
+          100% {
+            -webkit-transform: translateX(0%);
+            visibility: visible
+          }
         }
-
 
         /* Decorate scroll bar for years list*/
 
@@ -88,7 +139,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
           width: 6px;
         }
 
-        #yearList{
+        #yearList {
           height: 220px;
         }
 
@@ -99,152 +150,154 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
 
         /* color the .dateSticker on selected */
 
-        .dateSticker.selected{
+        .dateSticker.selected {
           background: var(--my-elem-primary);
           color: #fff;
         }
 
         /* .mainHeader bg color to primary color */
 
-        .mainHeader{
+        .mainHeader {
           padding: 10px;
           border-bottom: 1px solid #ddd;
           background: var(--my-elem-primary);
           color: #fff;
-          }
+        }
 
         /* disabled .dateSticker color and pointer */
 
-        .dateSticker[disabled]{
-          color:#9d9898;
+        .dateSticker[disabled] {
+          color: #9d9898;
           cursor: not-allowed !important;
         }
 
         /* change border on hover on years in  years list and months in months list */
 
-        .dateItem:hover{
+        .dateItem:hover {
           transition: border 0.3s ease;
-          border:1px solid #eee;
+          border: 1px solid #eee;
         }
 
-          .flex-horizontal,.dates{
-            @apply(--layout-horizontal);
-          }
+        .flex-horizontal, .dates {
+          @apply(--layout-horizontal);
+        }
 
-          .flexchild {
-            @apply(--layout-flex);
-            @apply(--layout-horizontal);
-            font-size: 15px;
-            justify-content: center;
-            align-items: center;
-            color: #474e54;
-          }
+        .flexchild {
+          @apply(--layout-flex);
+          @apply(--layout-horizontal);
+          font-size: 15px;
+          justify-content: center;
+          align-items: center;
+          color: #474e54;
+        }
 
-          .dayNames,.dates{
+        .dayNames, .dates {
           @apply(--layout-justified);
-          }
+        }
 
-          .dates .dateSticker{
-            border-radius: 50%;
-            padding: 4px;
-            text-align: center;
-            width: 24px;
-            @apply(--layout-horizontal);
-            align-items: center;
-            justify-content: center;
-            height: 24px;
-            cursor: pointer;
-            margin: 2px;
-            font-size: 14px;
-          }
+        .dates .dateSticker {
+          border-radius: 50%;
+          padding: 4px;
+          text-align: center;
+          width: 24px;
+          @apply(--layout-horizontal);
+          align-items: center;
+          justify-content: center;
+          height: 24px;
+          cursor: pointer;
+          margin: 2px;
+          font-size: 14px;
+        }
 
-          .notextselect,.dateSticker{
+        .notextselect, .dateSticker {
           -webkit-user-select: none;
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
         }
 
-          .dayNames>div{
-            padding: 12px;
-            font-size: 12px;
-            color: #474e54;
-          }
+        .dayNames > div {
+          padding: 12px;
+          font-size: 12px;
+          color: #474e54;
+        }
 
-          .menu_item{
-            cursor:pointer;
-          }
+        .menu_item {
+          cursor: pointer;
+        }
 
-          .flex-wrap {
-            @apply(--layout-horizontal);
-            @apply(--layout-wrap);
-            height:100%;
-            align-items: center;
-            overflow: auto;
-            justify-content: center;
-            overflow:auto;
-          }
+        .flex-wrap {
+          @apply(--layout-horizontal);
+          @apply(--layout-wrap);
+          height: 100%;
+          align-items: center;
+          overflow: auto;
+          justify-content: center;
+          overflow: auto;
+        }
 
-          .monthwrap{
-            @apply(--layout-horizontal);
-            @apply(--layout-wrap);
-            justify-content: center;
-          }
+        .monthwrap {
+          @apply(--layout-horizontal);
+          @apply(--layout-wrap);
+          justify-content: center;
+        }
 
-          .monthwrap div{
-            margin: 4px;
-          }
+        .monthwrap div {
+          margin: 4px;
+        }
 
-          .dateItem{
-            border: 1px solid transparent;
-            cursor: pointer;
-            font-size: 15px;
-            padding: 8px 12px;
-            border-radius: 4px;
-          }
+        .dateItem {
+          border: 1px solid transparent;
+          cursor: pointer;
+          font-size: 15px;
+          padding: 8px 12px;
+          border-radius: 4px;
+        }
+
+        .flex-wrap div {
+          padding: 8px;
+          margin: 3px;
+          font-size: 13px;
+        }
+
+        .pageContainer {
+          padding-bottom: 6px;
+        }
+
+        .yearContainer {
+          cursor: pointer;
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          font-size: 15px;
+          color: rgba(255, 255, 255, 0.92);
+          padding: 6px;
+        }
+
+        .monthContainer {
+          padding: 6px;
+          font-size: 2em;
+          font-weight: bold;
+        }
+
+        .clear-btn {
+          background: var(--my-elem-primary);
+          color: #fff;
+        }
+      </style>
 
 
-          .flex-wrap div{
-            padding: 8px;
-            margin: 3px;
-            font-size: 13px;
-          }
+      <!-- Main header date,month,year are compund binded to selected date -->
 
-          .pageContainer{
-                padding-bottom: 6px;
-          }
-
-          .yearContainer{
-            cursor: pointer;
-            @apply(--layout-horizontal);
-            @apply(--layout-center);
-            font-size:15px;
-            color:rgba(255, 255, 255, 0.92);
-            padding: 6px;
-          }
-
-          .monthContainer{
-            padding: 6px;
-            font-size: 2em;
-            font-weight: bold;
-          }
-          
-          .clear-btn{
-            background: var(--my-elem-primary);
-            color: #fff;
-          }
-          </style>
-
-
-        <!-- Main header date,month,year are compund binded to selected date -->
-
+      <div class="paper-material card" elevation="1">
         <div class="mainHeader" style="">
-            <div class="yearContainer notextselect" type='yearList' on-tap="_show">
-                {{_getUpdated(date,'year')}}
-            </div>
-            <div class="monthContainer notextselect">
-              <span type='calendarContent' on-tap="_show" class="menu_item">{{_getUpdated(date,'day')}}</span>, <span class='menu_item' type='monthsList' on-tap="_show">{{_getUpdated(date,'month')}}</span> <span class='menu_item' type='calendarContent' on-tap="_show">{{_getUpdated(date,'date')}}</span>
-            </div>
+          <div class="yearContainer notextselect" type='yearList' on-tap="_show">
+            {{_getUpdated(date,'year')}}
+          </div>
+          <div class="monthContainer notextselect">
+            <span type='calendarContent' on-tap="_show" class="menu_item">{{_getUpdated(date,'day')}}</span>, <span
+                  class='menu_item' type='monthsList' on-tap="_show">{{_getUpdated(date,'month')}}</span> <span
+                  class='menu_item' type='calendarContent' on-tap="_show">{{_getUpdated(date,'date')}}</span>
+          </div>
         </div>
 
         <div>
@@ -252,67 +305,74 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
           <!-- sub header with  left, right icon and present viewing month  -->
           <div class="container menu flex-horizontal" style="padding: 4px 0px;">
             <paper-icon-button on-tap="_swipePrevMonth" icon="my-icons:left"></paper-icon-button>
-            <div class="flexchild"> <span></span>
-            <span>{{monthFormat(currentMonth)}}</span>
-            <span  style="margin-left:4px;"> {{yearFormat(currentYear)}} </span> </div>
-              <paper-icon-button on-tap="_swipeNextMonth" icon="my-icons:right"></paper-icon-button>
+            <div class="flexchild"><span></span>
+              <span>{{monthFormat(currentMonth)}}</span>
+              <span style="margin-left:4px;"> {{yearFormat(currentYear)}} </span></div>
+            <paper-icon-button on-tap="_swipeNextMonth" icon="my-icons:right"></paper-icon-button>
           </div>
 
 
-        <!-- .pageContainer contains calendar, months list and years list  -->
+          <!-- .pageContainer contains calendar, months list and years list  -->
 
-        <div class="pageContainer">
+          <div class="pageContainer">
 
-              <!-- years list -->
+            <!-- years list -->
 
-              <div id="yearList" class="page" style="display:none;">
+            <div id="yearList" class="page" style="display:none;">
               <div class="flex-wrap">
                 <template is="dom-repeat" items="{{years}}">
                   <div class="dateItem notextselect" on-tap="_setYear">{{item}}</div>
                 </template>
               </div>
-              </div>
+            </div>
 
-              <!-- months list -->
+            <!-- months list -->
 
-              <div id="monthsList" class="page" style="display:none;">
-                <div class="monthwrap">
-                <template is="dom-repeat" items='["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"]'>
+            <div id="monthsList" class="page" style="display:none;">
+              <div class="monthwrap">
+                <template is="dom-repeat"
+                          items='["Jan","Feb","Mar","April","May","June","July","Aug","Sep","Oct","Nov","Dec"]'>
                   <div class="dateItem notextselect" on-tap="_setMonth">{{item}}</div>
                 </template>
-                </div>
               </div>
+            </div>
 
-              <!-- calendar -->
+            <!-- calendar -->
 
-              <div class='container page' id="calendarContent">
-              <div  id="mainContent">
+            <div class='container page' id="calendarContent">
+              <div id="mainContent">
                 <div class="container flex-horizontal dayNames">
-                <div>S</div>
-                <div>M</div>
-                <div>T</div>
-                <div>W</div>
-                <div>T</div>
-                <div>F</div>
-                <div>S</div>
+                  <div>S</div>
+                  <div>M</div>
+                  <div>T</div>
+                  <div>W</div>
+                  <div>T</div>
+                  <div>F</div>
+                  <div>S</div>
                 </div>
                 <div id="dateContainer">
 
-                <!-- separator splits calendar into 6 rows -->
+                  <!-- separator splits calendar into 6 rows -->
 
-                <template is="dom-repeat" items="{{separator}}" as="row">
-                  <div class="dates">
-                  <template is="dom-repeat" items="{{_getDays(row,separator)}}" as="day">
-                    <div on-tap="_setDate" class$="{{_getDayClass(day.text, currentDay, currentMonth, currentYear)}}" disabled$="{{day.isDisabled}}" tabindex="1">{{day.text}}</div>
+                  <template is="dom-repeat" items="{{separator}}" as="row">
+                    <div class="dates">
+                      <template is="dom-repeat" items="{{_getDays(row,separator)}}" as="day">
+                        <div on-tap="_setDate"
+                             class$="{{_getDayClass(day.text, currentDay, currentMonth, currentYear)}}"
+                             disabled$="{{day.isDisabled}}" tabindex="1">{{day.text}}
+                        </div>
+                      </template>
+                    </div>
                   </template>
-                  </div>
-                </template>
-                <paper-button raised class="clear-btn" on-tap="_clearData">Clear</paper-button>
-                </div>
+                  <paper-button raised class="clear-btn" on-tap="_clearData">Clear</paper-button>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+
     `;
   }
 
@@ -332,7 +392,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
         type: Number
       },
       currentDay: {
-          type: Number
+        type: Number
       },
       minDate: {
         type: Date,
@@ -443,23 +503,23 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
     this.cf = 0;
     //fill with empty cells
     for (var i = 0; i < this.tmpDate.getDay(); i++) {
-      tmpArray.push({ text: "", isDisabled: false, i: this.cf++ });
+      tmpArray.push({text: "", isDisabled: false, i: this.cf++});
     }
 
     //fill days and check disable dates
     for (var i = 1; i <= this.monthDays(this.tmpDate); i++) {
       this.tmpDate.setDate(i);
       if ((this.minDate != null && this.tmpDate <= this.minDate) || (this.maxDate != null && this.tmpDate >= this.maxDate) || this.disabledWeekDay.indexOf(this.days_names[(this.tmpDate).getDay()]) != -1 || (this.disabledDays).indexOf(i) != -1) {
-        tmpArray.push({ text: i, isDisabled: true, i: this.cf++ });
+        tmpArray.push({text: i, isDisabled: true, i: this.cf++});
       } else {
-        tmpArray.push({ text: i, isDisabled: false, i: this.cf++ });
+        tmpArray.push({text: i, isDisabled: false, i: this.cf++});
       }
 
     }
     //fill remaining empty cells
     this.cf = (tmpArray.length > 35) ? (42 - (tmpArray.length)) : (34 - (tmpArray.length));
     for (var j = 0; j <= this.cf; j++) {
-      tmpArray.push({ text: "" });
+      tmpArray.push({text: ""});
     }
     this.days = tmpArray;
     tmpArray = null;
@@ -515,11 +575,11 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
   }
 
   triggerEvent(e, data) {
-    var event = new CustomEvent(e, { detail: { dates: data } });
+    var event = new CustomEvent(e, {detail: {dates: data}});
     this.dispatchEvent(event);
   }
 
-  _clearData(){
+  _clearData() {
     let newDate = new Date("1970");
     this.set('date', newDate);
     this._populate(newDate, null);
@@ -532,6 +592,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
     this.current_page = 'calendarContent';
     this.pagination();
   }
+
   _setMonth(e) {
     this.currentMonth = this.months_names.indexOf(e.model.item);
     this.generateTable();
@@ -577,7 +638,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
       // don't dispatch the date changed event if the element is just initialising
       return;
     }
-    this.dispatchEvent(new CustomEvent('date-change', { detail: { date: newDate } }));
+    this.dispatchEvent(new CustomEvent('date-change', {detail: {date: newDate}}));
   }
 
   dateFormat(date) {
@@ -589,6 +650,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
   monthFormat() {
     return this.months_names[this.currentMonth]
   }
+
   yearFormat() {
     return this.currentYear;
   }
@@ -606,7 +668,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
     tmp.setMonth(this.currentMonth + x);
     this.currentMonth = tmp.getMonth();
     this.currentYear = tmp.getFullYear();
-    this.dispatchEvent(new CustomEvent('month-change', { detail: { date: this.tmpDate } }));
+    this.dispatchEvent(new CustomEvent('month-change', {detail: {date: this.tmpDate}}));
     this.generateTable();
     this.separator = [0, 1, 2, 3, 4, 5];
   }
@@ -616,6 +678,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
       node.removeEventListener(eventName, onceCallback);
       callback();
     }
+
     node.addEventListener(eventName, onceCallback);
   }
 
