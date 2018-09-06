@@ -16,8 +16,8 @@ class DatePickerLite extends PolymerElement {
     // language=HTML
     return html`
       <style>
-        
-        :host{
+
+        :host {
           display: block;
           position: absolute;
         }
@@ -37,7 +37,34 @@ class DatePickerLite extends PolymerElement {
         }
 
         iron-icon {
+          margin-right: 8px;
           cursor: pointer;
+        }
+
+        .clear-btn {
+          background: var(--my-elem-primary);
+          color: #fff;
+          padding: 6px;
+          margin: 10px 0 10px 10px;
+        }
+
+        .close-btn {
+          background: var(--my-elem-grayed);
+          color: #fff;
+          padding: 6px;
+          margin: 10px 0 10px 10px;
+        }
+
+        .monthInput {
+          width: 60px;
+        }
+
+        .dayInput {
+          width: 50px;
+        }
+
+        .yearInput {
+          width: 50px;
         }
 
         *[hidden] {
@@ -52,14 +79,17 @@ class DatePickerLite extends PolymerElement {
         <iron-icon slot="prefix" icon="date-range" alt="toggle" title="toggle"
                    on-tap="toggleCalendar"></iron-icon>
         <div slot="input" class="paper-input-input">
-          <input value="{{monthInput::input}}" placeholder="month" type="number" max="12" style="width: 60px">/
-          <input value="{{dayInput::input}}" placeholder="day" type="number" max="31" style="width: 50px">/
-          <input value="{{yearInput::input}}" placeholder="year" type="number" style="width: 50px">
+          <input value="{{monthInput::input}}" class="monthInput" placeholder="mm" type="number" max="12">/
+          <input value="{{dayInput::input}}" class="dayInput" placeholder="dd" type="number" max="31">/
+          <input value="{{yearInput::input}}" class="yearInput" placeholder="yyyy" type="number">
         </div>
       </paper-input-container>
 
-      <calendar-lite slot="dropdown-content" on-date-change="datePicked" date="{{inputDate}}" hidden$="{{hidden}}">
-
+      <calendar-lite on-date-change="datePicked" date="[[inputDate]]" hidden$="[[!opened]]">
+        <div slot="actions">
+          <paper-button raised class="clear-btn" on-tap="_clearData">Clear</paper-button>
+          <paper-button raised class="close-btn" on-tap="toggleCalendar">Close</paper-button>
+        </div>
       </calendar-lite>
 
     `;
@@ -98,14 +128,14 @@ class DatePickerLite extends PolymerElement {
         type: Boolean,
         value: false
       },
-      hidden: {
-        type: Boolean,
-        value: true
-      },
       inputDate: {
         type: Date,
         notify: true,
         computed: 'computeDate(monthInput, dayInput, yearInput)'
+      },
+      opened: {
+        type: Boolean,
+        value: false
       }
     };
   }
@@ -152,12 +182,16 @@ class DatePickerLite extends PolymerElement {
 
     this.dateJustChanged = true;
     this.value = this._getDateString(this.date);
-
-    this.maskedDate = this._getDateString(this.date);
   }
 
   toggleCalendar() {
-    this.set('hidden', !this.hidden);
+    this.set('opened', !this.opened);
+  }
+
+  _clearData() {
+    this.set('monthInput', '01');
+    this.set('dayInput', '01');
+    this.set('yearInput', '1970');
   }
 
   valueChanged() {

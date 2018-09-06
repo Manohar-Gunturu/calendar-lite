@@ -37,10 +37,12 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
           font-family: Helvetica, Arial, sans-serif;
           border: 1px solid #eee;
           --my-elem-primary: #3acfe3;
+          --my-elem-grayed: #cccccc;
           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
           text-rendering: optimizeLegibility !important;
           -webkit-font-smoothing: antialiased !important;
           position: relative;
+          top: -10px;
           z-index: 1;
         }
 
@@ -282,10 +284,6 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
           font-weight: bold;
         }
 
-        .clear-btn {
-          background: var(--my-elem-primary);
-          color: #fff;
-        }
       </style>
 
 
@@ -367,11 +365,14 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
                       </template>
                     </div>
                   </template>
-                  <paper-button raised class="clear-btn" on-tap="_clearData">Clear</paper-button>
+
                 </div>
               </div>
             </div>
           </div>
+
+          <slot name="actions"></slot>
+
         </div>
       </div>
 
@@ -580,12 +581,6 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
   triggerEvent(e, data) {
     var event = new CustomEvent(e, {detail: {dates: data}});
     this.dispatchEvent(event);
-  }
-
-  _clearData() {
-    let newDate = new Date("1970");
-    this.set('date', newDate);
-    this._populate(newDate, null);
   }
 
   _setYear(e) {
