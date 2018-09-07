@@ -581,6 +581,8 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
 
   _keyPressSelect(e) {
     if (e.which === 13){
+      this._setDate(e);
+      return;
       var target = e.target;
       var f = e.model.day;
       if (f.text != "" && !e.model.day.isDisabled) {

@@ -56,15 +56,23 @@ class DatePickerLite extends PolymerElement {
         }
 
         .monthInput {
-          width: 60px;
+          width: 35px;
         }
 
         .dayInput {
-          width: 50px;
+          width: 25px;
         }
 
         .yearInput {
-          width: 50px;
+          width: 40px;
+        }
+
+        /***************** this is used to remove arrows from inputs *****************************/
+        
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
         }
 
         *[hidden] {
@@ -72,16 +80,15 @@ class DatePickerLite extends PolymerElement {
         }
       </style>
 
-      <paper-input-container always-float-label="true"
-                             no-label-float="[[noLabelFloat]]"
+      <paper-input-container always-float-label
                              required$="[[required]]" invalid="{{invalid}}" error-message="Invalid date.">
         <label hidden$=[[!label]] slot="label">[[label]]</label>
         <iron-icon slot="prefix" on-keypress="keyCalendar" icon="date-range" alt="toggle" title="toggle" tabindex="1"
                    on-tap="toggleCalendar"></iron-icon>
         <div slot="input" class="paper-input-input">
-          <input value="{{monthInput::input}}" class="monthInput" placeholder="mm" type="number" max="12">/
-          <input value="{{dayInput::input}}" class="dayInput" placeholder="dd" type="number" max="31">/
-          <input value="{{yearInput::input}}" class="yearInput" placeholder="yyyy" type="number">
+          <input value="{{monthInput::input}}" class="monthInput" placeholder="mm" type="number" min="1" max="12">/
+          <input value="{{dayInput::input}}" class="dayInput" placeholder="dd" type="number" min="1" max="31">/
+          <input value="{{yearInput::input}}" class="yearInput" placeholder="yyyy" type="number" maxlength="4" min="1" max="9999">
         </div>
       </paper-input-container>
 
@@ -106,9 +113,6 @@ class DatePickerLite extends PolymerElement {
         value: false
       },
       label: String,
-      maskedDate: {
-        type: String
-      },
       monthInput: {
         type: Number
       },
@@ -171,12 +175,26 @@ class DatePickerLite extends PolymerElement {
   }
 
   computeDate(month, day, year) {
+
+    if (year < 1 || year.length > 4) {
+      this.set('yearInput', 1900);
+    }
+
+    if (month < 1) {
+      this.set('monthInput', 1);
+    }
+
+    if (day < 1) {
+      this.set('dayInput', 1);
+    }
+
     if (typeof month === 'undefined' || typeof day === 'undefined' || typeof year === 'undefined' || year.length < 4) {
       return;
     }
 
     let newDate = new Date(year, month - 1, day);
     this.set('invalid', !moment(newDate, 'YYYY-MM-DD', true).isValid());
+    console.log(this.invalid);
     this.set('inputDate', newDate);
   }
 
