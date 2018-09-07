@@ -359,6 +359,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
                     <div class="dates">
                       <template is="dom-repeat" items="{{_getDays(row,separator)}}" as="day">
                         <div on-tap="_setDate"
+                             on-keydown="_keyPressSelect"
                              class$="{{_getDayClass(day.text, currentDay, currentMonth, currentYear)}}"
                              disabled$="{{day.isDisabled}}" tabindex="1">{{day.text}}
                         </div>
@@ -550,7 +551,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
         if (this.multiSelect.consequent) {
           this.multiple = [];
           this.cf = f.i;
-          this.multiple.push(f.text + "," + this.currentMonth + "," + this.currentYear)
+          this.multiple.push(f.text + "," + this.currentMonth + "," + this.currentYear);
           for (var j = 1; this.multiple.length < (this.multiSelect.max); j++) {
             this.tmpDate = new Date(this.currentYear, this.currentMonth, f.text + j);
             if ((this.minDate != null && this.tmpDate <= this.minDate) || (this.maxDate != null && this.tmpDate >= this.maxDate) || this.disabledWeekDay.indexOf(this.days_names[(this.tmpDate).getDay()]) != -1 || (this.disabledDays).indexOf(this.tmpDate.getDate()) != -1) {
@@ -563,7 +564,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
           if (this.cf < 0) {
             this.multiple.push(f.text + "," + this.currentMonth + "," + this.currentYear);
           } else {
-            target.classList.remove('selected')
+            target.classList.remove('selected');
             this.multiple.splice(this.cf, 1);
             this.triggerEvent('multiselect', this.multiple);
             return;
@@ -575,6 +576,45 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
         this.triggerEvent('multiselect', this.multiple);
       }
       this.date = new Date(this.currentYear, this.currentMonth, f.text);
+    }
+  }
+
+  _keyPressSelect(e) {
+    if (e.which === 13){
+      var target = e.target;
+      var f = e.model.day;
+      if (f.text != "" && !e.model.day.isDisabled) {
+
+        if (this.multiSelect != null) {
+          if (this.multiSelect.consequent) {
+            this.multiple = [];
+            this.cf = f.i;
+            this.multiple.push(f.text + "," + this.currentMonth + "," + this.currentYear);
+            for (var j = 1; this.multiple.length < (this.multiSelect.max); j++) {
+              this.tmpDate = new Date(this.currentYear, this.currentMonth, f.text + j);
+              if ((this.minDate != null && this.tmpDate <= this.minDate) || (this.maxDate != null && this.tmpDate >= this.maxDate) || this.disabledWeekDay.indexOf(this.days_names[(this.tmpDate).getDay()]) != -1 || (this.disabledDays).indexOf(this.tmpDate.getDate()) != -1) {
+              } else {
+                this.multiple.push(this.tmpDate.getDate() + "," + this.tmpDate.getMonth() + "," + this.tmpDate.getFullYear());
+              }
+            }
+          } else {
+            this.cf = this.multiple.indexOf(f.text + "," + this.currentMonth + "," + this.currentYear);
+            if (this.cf < 0) {
+              this.multiple.push(f.text + "," + this.currentMonth + "," + this.currentYear);
+            } else {
+              target.classList.remove('selected');
+              this.multiple.splice(this.cf, 1);
+              this.triggerEvent('multiselect', this.multiple);
+              return;
+            }
+            if (this.multiple.length > this.multiSelect.max) {
+              this.multiple.shift();
+            }
+          }
+          this.triggerEvent('multiselect', this.multiple);
+        }
+        this.date = new Date(this.currentYear, this.currentMonth, f.text);
+      }
     }
   }
 

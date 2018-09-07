@@ -76,7 +76,7 @@ class DatePickerLite extends PolymerElement {
                              no-label-float="[[noLabelFloat]]"
                              required$="[[required]]" invalid="{{invalid}}" error-message="Invalid date.">
         <label hidden$=[[!label]] slot="label">[[label]]</label>
-        <iron-icon slot="prefix" icon="date-range" alt="toggle" title="toggle"
+        <iron-icon slot="prefix" on-keypress="keyCalendar" icon="date-range" alt="toggle" title="toggle" tabindex="1"
                    on-tap="toggleCalendar"></iron-icon>
         <div slot="input" class="paper-input-input">
           <input value="{{monthInput::input}}" class="monthInput" placeholder="mm" type="number" max="12">/
@@ -85,7 +85,7 @@ class DatePickerLite extends PolymerElement {
         </div>
       </paper-input-container>
 
-      <calendar-lite on-date-change="datePicked" date="[[inputDate]]" hidden$="[[!opened]]">
+      <calendar-lite id="calendar" on-date-change="datePicked" date="[[inputDate]]" hidden$="[[!opened]]">
         <div slot="actions">
           <paper-button raised class="clear-btn" on-tap="_clearData">Clear</paper-button>
           <paper-button raised class="close-btn" on-tap="toggleCalendar">Close</paper-button>
@@ -99,18 +99,12 @@ class DatePickerLite extends PolymerElement {
     return {
       value: {
         type: String,
-        notify: true,
-        observer: 'valueChanged'
-      },
-      date: {
-        type: Object,
-        observer: 'dateChanged'
+        notify: true
       },
       readonly: {
         type: Boolean,
         value: false
       },
-      readableDate: String,
       label: String,
       maskedDate: {
         type: String
@@ -130,14 +124,20 @@ class DatePickerLite extends PolymerElement {
       },
       inputDate: {
         type: Date,
-        notify: true,
-        computed: 'computeDate(monthInput, dayInput, yearInput)'
+        notify: true
       },
       opened: {
         type: Boolean,
         value: false
-      }
+      },
+      _clearDateInProgress: Boolean
     };
+  }
+
+  static get observers() {
+    return [
+      'computeDate(monthInput, dayInput, yearInput)'
+    ];
   }
 
   _getDateString(date) {
@@ -152,6 +152,10 @@ class DatePickerLite extends PolymerElement {
   }
 
   datePicked(event) {
+    if (this._clearDateInProgress) {
+      this._clearDateInProgress = false;
+      return;
+    }
     let date = event.detail.date;
     let month = '' + (date.getMonth() + 1);
     let day = '' + date.getDate();
@@ -160,47 +164,40 @@ class DatePickerLite extends PolymerElement {
     month = month.length < 2 ? '0' + month : month;
     day = day.length < 2 ? '0' + day : day;
 
-    this.set('date', event.detail.date);
+    this.value = this._getDateString(date);
     this.set('monthInput', month);
     this.set('dayInput', day);
     this.set('yearInput', year);
-
-    return;
   }
 
   computeDate(month, day, year) {
     if (typeof month === 'undefined' || typeof day === 'undefined' || typeof year === 'undefined' || year.length < 4) {
       return;
     }
+
     let newDate = new Date(year, month - 1, day);
     this.set('invalid', !moment(newDate, 'YYYY-MM-DD', true).isValid());
-    return newDate;
-  }
-
-  dateChanged() {
-    this.readableDate = this.date.toDateString();
-
-    this.dateJustChanged = true;
-    this.value = this._getDateString(this.date);
+    this.set('inputDate', newDate);
   }
 
   toggleCalendar() {
     this.set('opened', !this.opened);
   }
 
-  _clearData() {
-    this.set('monthInput', '01');
-    this.set('dayInput', '01');
-    this.set('yearInput', '1970');
+  keyCalendar(event){
+    if (event.which === 13 || event.button === 0){
+      this.set('opened', !this.opened);
+    }
   }
 
-  valueChanged() {
-    if (this.dateJustChanged) {
-      this.dateJustChanged = false;
-      return;
-    }
-    this.date = new Date(this.value);
+  _clearData() {
+    this._clearDateInProgress = true;
+    this.set('inputDate', new Date());
+    this.set('monthInput', undefined);
+    this.set('dayInput', undefined);
+    this.set('yearInput', undefined);
   }
+
 }
 
 window.customElements.define('datepicker-lite', DatePickerLite);
