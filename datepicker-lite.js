@@ -88,7 +88,7 @@ class DatePickerLite extends PolymerElement {
         <div slot="input" class="paper-input-input">
           <input value="{{monthInput::input}}" class="monthInput" placeholder="mm" type="number" min="1" max="12">/
           <input value="{{dayInput::input}}" class="dayInput" placeholder="dd" type="number" min="1" max="31">/
-          <input value="{{yearInput::input}}" class="yearInput" placeholder="yyyy" type="number" maxlength="4" min="1" max="9999">
+          <input value="{{yearInput::input}}" class="yearInput" placeholder="yyyy" type="string" maxlength="4" min="1" max="9999">
         </div>
       </paper-input-container>
 
@@ -175,8 +175,7 @@ class DatePickerLite extends PolymerElement {
   }
 
   computeDate(month, day, year) {
-
-    if (year < 1 || year.length > 4) {
+    if (year < 1 || isNaN(year)) {
       this.set('yearInput', 1900);
     }
 
