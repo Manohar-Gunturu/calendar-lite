@@ -49,8 +49,6 @@ class DatePickerLite extends PolymerElement {
         }
 
         .close-btn {
-          background: var(--my-elem-grayed);
-          color: #fff;
           padding: 6px;
           margin: 10px 0 10px 10px;
         }
@@ -88,7 +86,7 @@ class DatePickerLite extends PolymerElement {
         <div slot="input" class="paper-input-input">
           <input value="{{monthInput::input}}" class="monthInput" placeholder="mm" type="number" min="1" max="12">/
           <input value="{{dayInput::input}}" class="dayInput" placeholder="dd" type="number" min="1" max="31">/
-          <input value="{{yearInput::input}}" class="yearInput" placeholder="yyyy" type="string" maxlength="4" min="1" max="9999">
+          <input value="{{yearInput::input}}" class="yearInput" placeholder="yyyy" type="number" maxlength="4" min="1" max="9999">
         </div>
       </paper-input-container>
 
@@ -175,25 +173,21 @@ class DatePickerLite extends PolymerElement {
   }
 
   computeDate(month, day, year) {
+    this.set('invalid', false);
+
     if (year < 1 || year > 9999 ) {
       this.set('invalid', true);
       return;
-    } else {
-      this.set('invalid', false);
     }
 
     if (month < 1 || month > 12 ) {
       this.set('invalid', true);
       return;
-    } else {
-      this.set('invalid', false);
     }
 
     if (day < 1 || day > 31) {
       this.set('invalid', true);
       return;
-    } else {
-      this.set('invalid', false);
     }
 
     if (typeof month === 'undefined' || typeof day === 'undefined' || typeof year === 'undefined' || year.length < 4) {
@@ -201,6 +195,16 @@ class DatePickerLite extends PolymerElement {
     }
 
     let newDate = new Date(year, month - 1, day);
+
+    let newYear = newDate.getFullYear();
+    let newMonth = newDate.getMonth() + 1;
+    let newDay = newDate.getDate();
+
+    if (newMonth !== Number(month) || newDay !== Number(day) || newYear !== Number(year)) {
+      this.set('invalid', true);
+      return;
+    }
+
     this.set('invalid', !moment(newDate, 'YYYY-MM-DD', true).isValid());
 
     if (moment(newDate, 'YYYY-MM-DD', true).isValid()) {
@@ -224,6 +228,7 @@ class DatePickerLite extends PolymerElement {
     this.set('monthInput', undefined);
     this.set('dayInput', undefined);
     this.set('yearInput', undefined);
+    this.set('value', null);
   }
 
 }

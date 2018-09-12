@@ -36,8 +36,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
           -webkit-font-smoothing: antialiased;
           font-family: Helvetica, Arial, sans-serif;
           border: 1px solid #eee;
-          --my-elem-primary: #3acfe3;
-          --my-elem-grayed: #cccccc;
+          --my-elem-primary: var(--primary-color, #3acfe3);
           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
           text-rendering: optimizeLegibility !important;
           -webkit-font-smoothing: antialiased !important;
