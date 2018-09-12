@@ -40,8 +40,7 @@ class CalendarLite extends GestureEventListeners(PolymerElement) {
           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
           text-rendering: optimizeLegibility !important;
           -webkit-font-smoothing: antialiased !important;
-          position: relative;
-          top: -10px;
+          position: absolute;
           z-index: 1;
         }
 

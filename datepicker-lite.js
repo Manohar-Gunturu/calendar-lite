@@ -19,7 +19,6 @@ class DatePickerLite extends PolymerElement {
 
         :host {
           display: block;
-          position: absolute;
         }
 
         paper-input-container {
