@@ -175,16 +175,25 @@ class DatePickerLite extends PolymerElement {
   }
 
   computeDate(month, day, year) {
-    if (year < 1 || isNaN(year)) {
-      this.set('yearInput', 1900);
+    if (year < 1 || year > 9999 ) {
+      this.set('invalid', true);
+      return;
+    } else {
+      this.set('invalid', false);
     }
 
-    if (month < 1) {
-      this.set('monthInput', 1);
+    if (month < 1 || month > 12 ) {
+      this.set('invalid', true);
+      return;
+    } else {
+      this.set('invalid', false);
     }
 
-    if (day < 1) {
-      this.set('dayInput', 1);
+    if (day < 1 || day > 31) {
+      this.set('invalid', true);
+      return;
+    } else {
+      this.set('invalid', false);
     }
 
     if (typeof month === 'undefined' || typeof day === 'undefined' || typeof year === 'undefined' || year.length < 4) {
@@ -193,8 +202,10 @@ class DatePickerLite extends PolymerElement {
 
     let newDate = new Date(year, month - 1, day);
     this.set('invalid', !moment(newDate, 'YYYY-MM-DD', true).isValid());
-    console.log(this.invalid);
-    this.set('inputDate', newDate);
+
+    if (moment(newDate, 'YYYY-MM-DD', true).isValid()) {
+      this.set('inputDate', newDate);
+    }
   }
 
   toggleCalendar() {
