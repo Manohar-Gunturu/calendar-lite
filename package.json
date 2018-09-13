@@ -1,0 +1,19 @@
+{
+  "name": "calendar-lite",
+  "version": "1.7.5",
+  "description": "Multi select date picker calendar WebComponent - built with Polymer",
+  "homepage": "https://github.com/daniel-tabarcea/calendar-lite",
+  "license": "see license in LICENSE",
+  "dependencies": {
+    "@polymer/iron-flex-layout": "^3.0.0-pre.21",
+    "@polymer/iron-icons": "^3.0.0-pre.25",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.21",
+    "@polymer/paper-button": "^3.0.0-pre.25",
+    "@polymer/paper-dropdown-menu": "^3.0.0-pre.21",
+    "@polymer/paper-icon-button": "^3.0.0-pre.21",
+    "@polymer/paper-input": "^3.0.0-pre.21",
+    "@polymer/paper-styles": "^3.0.0-pre.25",
+    "@polymer/polymer": "^3.0.0",
+    "moment": "^2.22.2"
+  }
+}
